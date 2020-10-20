@@ -27,6 +27,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     CardView cardSlideShow;
     @BindView(R.id.card_settings)
     CardView cardSettings;
+    @BindView(R.id.card_share)
+    CardView cardShare;
+    @BindView(R.id.card_rating)
+    CardView cardRating;
+    @BindView(R.id.card_about)
+    CardView cardAbout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.toolbar_title)
@@ -82,6 +88,21 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 .duration(2000)
                 .repeat(0)
                 .playOn(cardSettings);
+
+        YoYo.with(Techniques.Swing)
+                .duration(2000)
+                .repeat(0)
+                .playOn(cardShare);
+
+        YoYo.with(Techniques.Swing)
+                .duration(2000)
+                .repeat(0)
+                .playOn(cardRating);
+
+        YoYo.with(Techniques.Swing)
+                .duration(2000)
+                .repeat(0)
+                .playOn(cardAbout);
     }
 
     @Override
