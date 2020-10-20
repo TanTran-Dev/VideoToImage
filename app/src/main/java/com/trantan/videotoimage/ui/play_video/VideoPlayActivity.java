@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import com.trantan.videotoimage.R;
 import com.trantan.videotoimage.common.Constants;
 import com.trantan.videotoimage.common.Permission;
+import com.trantan.videotoimage.common.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -117,8 +118,8 @@ public class VideoPlayActivity extends AppCompatActivity {
         total_duration = videoView.getDuration();
 
         //display video duration
-        total.setText(timeConversion((long) total_duration));
-        current.setText(timeConversion((long) current_pos));
+        total.setText(Utils.timeConversion((long) total_duration));
+        current.setText(Utils.timeConversion((long) current_pos));
         seekBar.setMax((int) total_duration);
         final Handler handler = new Handler();
 
@@ -127,7 +128,7 @@ public class VideoPlayActivity extends AppCompatActivity {
             public void run() {
                 try {
                     current_pos = videoView.getCurrentPosition();
-                    current.setText(timeConversion((long) current_pos));
+                    current.setText(Utils.timeConversion((long) current_pos));
                     seekBar.setProgress((int) current_pos);
                     handler.postDelayed(this, 1000);
                 } catch (IllegalStateException ed) {
@@ -203,22 +204,6 @@ public class VideoPlayActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    //time conversion
-    public String timeConversion(long value) {
-        String songTime;
-        int dur = (int) value;
-        int hrs = (dur / 3600000);
-        int mns = (dur / 60000) % 60000;
-        int scs = dur % 60000 / 1000;
-
-        if (hrs > 0) {
-            songTime = String.format("%02d:%02d:%02d", hrs, mns, scs);
-        } else {
-            songTime = String.format("%02d:%02d", mns, scs);
-        }
-        return songTime;
     }
 
     // hide progress when the video is playing

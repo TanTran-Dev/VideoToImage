@@ -20,6 +20,7 @@ import com.trantan.videotoimage.R;
 import com.trantan.videotoimage.adapter.VideoAdapter;
 import com.trantan.videotoimage.common.Constants;
 import com.trantan.videotoimage.common.Permission;
+import com.trantan.videotoimage.common.Utils;
 import com.trantan.videotoimage.model.VideoModel;
 import com.trantan.videotoimage.ui.play_video.VideoPlayActivity;
 
@@ -67,7 +68,7 @@ public class VideoListActivity extends AppCompatActivity{
                 VideoModel videoModel = new VideoModel();
                 videoModel.setVideoTitle(title);
                 videoModel.setVideoUri(Uri.parse(data));
-                videoModel.setVideoDuration(timeConversion(Long.parseLong(duration)));
+                videoModel.setVideoDuration(Utils.timeConversion(Long.parseLong(duration)));
                 videoArrayList.add(videoModel);
 
             } while (cursor.moveToNext());
@@ -84,22 +85,6 @@ public class VideoListActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-    }
-
-    //time conversion
-    public String timeConversion(long value) {
-        String videoTime;
-        int dur = (int) value;
-        int hrs = (dur / 3600000);
-        int mns = (dur / 60000) % 60000;
-        int scs = dur % 60000 / 1000;
-
-        if (hrs > 0) {
-            videoTime = String.format("%02d:%02d:%02d", hrs, mns, scs);
-        } else {
-            videoTime = String.format("%02d:%02d", mns, scs);
-        }
-        return videoTime;
     }
 
     //runtime storage permission
